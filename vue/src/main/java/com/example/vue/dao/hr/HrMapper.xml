@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.example.vue.dao.hr.HrMapper">
+    <select id="roles" resultType="com.example.vue.pojo.Role">
+       select * from role r,hr_role hr where r.id=hr.rid and hr.hrid=#{id}
+    </select>
+    <select id="getAllHr" resultType="com.example.vue.pojo.Hr">
+        select * from hr
+        <if test="id>0">
+            WHERE id !=#{id}
+        </if>
+    </select>
+</mapper>

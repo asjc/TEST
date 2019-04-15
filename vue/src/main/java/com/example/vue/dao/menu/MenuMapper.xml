@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.example.vue.dao.menu.MenuMapper">
+    <resultMap id="ms" type="com.example.vue.pojo.Menu">
+        <id property="id" column="id"/>
+        <result property="url" column="url"/>
+        <collection property="roles" ofType="com.example.vue.pojo.Role">
+            <id property="id" column="rid"/>
+            <result property="name" column="rname"/>
+        </collection>
+    </resultMap>
+    <select id="getAllMenus" resultMap="ms">
+        select m.*,r.id as rid,r.name as rname
+        from menu m LEFT JOIN menu_role mr ON m.id=mr.mid
+        LEFT JOIN role r ON mr.rid=r.id
+    </select>
+
+    <resultMap id="BaseResultMap" type="com.example.vue.pojo.Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="component" property="component" javaType="java.lang.Object"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="iconCls" property="iconCls" jdbcType="VARCHAR"/>
+        <result column="keepAlive" property="keepAlive" jdbcType="BIT"/>
+        <result column="parentId" property="parentId" jdbcType="INTEGER"/>
+        <association property="meta" javaType="com.example.vue.pojo.MenuMeta">
+            <result column="keepAlive" property="keepAlive"/>
+            <result column="requireAuth" property="requireAuth"/>
+        </association>
+        <collection property="roles" ofType="com.example.vue.pojo.Role">
+            <id column="rid" property="id"/>
+            <result column="rname" property="name"/>
+            <result column="rnamezh" property="nameZh"/>
+        </collection>
+        <collection property="children" ofType="com.example.vue.pojo.Menu">
+            <id column="id2" property="id"/>
+            <result column="path2" property="path" jdbcType="VARCHAR"/>
+            <result column="component2" property="component" jdbcType="VARCHAR"/>
+            <result column="name2" property="name" jdbcType="VARCHAR"/>
+            <result column="iconCls2" property="iconCls" jdbcType="VARCHAR"/>
+            <association property="meta" javaType="com.example.vue.pojo.MenuMeta">
+                <result column="keepAlive2" property="keepAlive"/>
+                <result column="requireAuth2" property="requireAuth"/>
+            </association>
+            <collection property="children" ofType="com.example.vue.pojo.Menu">
+                <id column="id3" property="id"/>
+                <result column="name3" property="name" jdbcType="VARCHAR"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="getMenusByHrId" resultMap="BaseResultMap">
+        SELECT m1.`id`,m1.`path`,m1.`component`,m1.`iconCls`,m1.`name`,m1.`requireAuth`,m2.`component` AS component2,m2.`iconCls` AS iconCls2,m2.`keepAlive` AS keepAlive2,m2.`name` AS name2,m2.`path` AS path2,m2.`requireAuth` AS requireAuth2 FROM menu m1,menu m2 WHERE m1.`id`=m2.`parentId` AND m1.`id`!=1 AND m2.`id` IN(SELECT mr.`mid` FROM hr_role,menu_role mr WHERE hr_role.`rid`=mr.`rid` AND hr_role.`hrid`=#{hrId}) and m2.`enabled`=true order by m1.`id`,m2.`id`
+    </select>
+</mapper>
