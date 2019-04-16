@@ -1,0 +1,21 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper-->
+        <!--PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+        <!--"http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.mapper.BookMapper2">-->
+    <!--<insert id="addBook" parameterType="com.entity.Book">-->
+        <!--INSERT INTO `book` (`name`, `author`) VALUES(#{name},#{author})-->
+    <!--</insert>-->
+    <!--<delete id="deleteBookById" parameterType="int">-->
+        <!--delete from book where id=#{id}-->
+    <!--</delete>-->
+    <!--<update id="updateBookById" parameterType="com.entity.Book">-->
+        <!--UPDATE `book` SET `name` =#{name} ,`author` =#{author} WHERE `id` =#{id}-->
+    <!--</update>-->
+    <!--<select id="getBookById" parameterType="int" resultType="com.entity.Book">-->
+        <!--select * from book where id=#{id}-->
+    <!--</select>-->
+    <!--<select id="getAllBooks" resultType="com.entity.Book">-->
+        <!--select * from book-->
+    <!--</select>-->
+<!--</mapper>-->
