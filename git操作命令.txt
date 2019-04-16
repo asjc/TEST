@@ -1,0 +1,24 @@
+ pwd 显示当前位处目录
+mkdir 创建
+git init 把这个目录变成git可以管理的仓库
+git add 文件添加到暂存区里面
+git commit提交至本地仓库 -m添加备注信息
+git status查看文件状态	
+设置完整信息
+git config --global user.email "邮箱"
+git config --global user.name "名字"
+readme.md文件不在本地仓库
+git pull --rebase origiin master
+
+
+https://blog.csdn.net/liuweixiao520/article/details/78971221
+
+mkdir TEST
+cd TEST
+git init 
+复制项目到路径
+git status
+git add .添加到仓库
+git commit -m提交至仓库
+git remote add origin https://github.com/asjc/TEST.git本地仓库与远程仓库关联
+git push -u origin master推送至github
